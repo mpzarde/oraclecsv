@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<!--
+Copy the csvloader.jar file to ANT_HOME/lib folder along with the JDBC drivers for Oracle.
+
+Below is a sample configuration to load data into a table called systemscripttb including 
+the CLOB field.
+
+Parms are:
+
+dbmsUri is the Oracle jdbc driver connection string
+
+table is the table you want to update
+
+truncate = true or false depending on whether or not you want to truncate the table BEFORE data
+is loaded into it
+
+filepath is the relative or absolute filepath to the Comma Separated Values (CSV) file. Look at 
+testdata.txt for a sample of how to add a record to systemscript tb. Notice the CLOB= field and
+related testclob.txt file.
+
+dateformat is the java based data format for both input and output.
+
+See http://java.sun.com/j2se/1.4.2/docs/api/java/text/SimpleDateFormat.html for the actual format
+parameters.
+-->
+
+<project name="Loader Test" default="exportsystemscript" basedir=".">
+  <taskdef name="loader" classname="com.truecool.ant.OracleLoaderTask"/>
+  <taskdef name="export" classname="com.truecool.ant.OracleExportTask"/>
+
+  <target name="exportsystemscript">
+    <export
+      dbmsuri="jdbc:oracle:thin:schema/password@host:1521:sid"
+      table="systemscripttb"
+      filepath="systemscript.txt"
+      dateformat="MM/dd/yyyy hh:mm:ss a"/>
+  </target>
+
+
+  <target name="loadsystemscript">
+    <loader
+      dbmsuri="jdbc:oracle:thin:schema/password@host:1521:sid"
+      table="systemscripttb"
+      truncate="true"
+      filepath="file.txt"
+      dateformat="MM/dd/yyyy hh:mm:ss a"/>
+  </target>
+
+  <target name="loadfromsource">
+    <antcall target="exportsystemscript"/>
+    <antcall target="loadsystemscript"/>
+  </target> 
+</project>
+

@@ -1,0 +1,1 @@
+7,FEECAL,1,CLOB=testclob.txt,TRANSACTIVITYCODE Ev,Calculate the NETBILL line fee value based on the ct type,ACCTG,N/A,0,1,7,1/1/2001,7,12/31/2099 11:59:59 PM,7,1,1/1/2001,A,1,1/1/2001,0

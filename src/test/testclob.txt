@@ -1,0 +1,56 @@
+// Test CLOB
+import com.palmtreebusiness.edms.accounting.code.business.TransActivityCode;
+import com.palmtreebusiness.edms.accounting.statement.business.StatementLineDetail;
+import com.palmtreebusiness.edms.common.document.business.DocumentFormatType;
+import com.palmtreebusiness.edms.marketintelligence.baseratefee.business.RateFeeCode;
+import com.palmtreebusiness.edms.accounting.code.business.GlTransactionType;
+
+// for inter company invoice/statements processing
+
+DocumentFormatType documentFormatType = detail.getDocumentType();
+GlTransactionType glTransactionType = detail.getGlTransactionType();
+
+double calclineFees = lineFees;
+
+int documentFormatTypeKey = 0;
+int glTransactionTypeKey = 0;
+
+if(documentFormatType != null) {
+  documentFormatTypeKey = documentFormatType.getKey();
+}
+if(glTransactionType != null) {
+  glTransactionTypeKey = glTransactionType.getKey();
+}
+
+if (glTransactionTypeKey == 2) {
+	if (documentFormatTypeKey == 47)  {	//producer pay...
+	
+		if (feeCode.isEqualizationFeeCode()) {
+			calclineFees += convertedFeeAmount;
+			calclineFees += surchargeAmount;
+		} else {
+			calclineFees -= convertedFeeAmount;
+			calclineFees -= surchargeAmount;
+		}
+	
+	} else {
+		calclineFees += convertedFeeAmount;
+		calclineFees += surchargeAmount;
+	}
+} else {
+
+	if (documentFormatTypeKey == 48)  {	//producer sale...
+	
+		if (feeCode.isEqualizationFeeCode()) {
+			calclineFees += convertedFeeAmount;
+			calclineFees += surchargeAmount;
+		} else {
+			calclineFees -= convertedFeeAmount;
+			calclineFees -= surchargeAmount;
+		}
+	
+	} else {
+		calclineFees += convertedFeeAmount;
+		calclineFees += surchargeAmount;
+	}
+}
