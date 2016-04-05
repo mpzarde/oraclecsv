@@ -1,28 +1,17 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>com.truecool.ant</groupId>
-  <artifactId>oraclecsv</artifactId>
-  <packaging>jar</packaging>
-  <version>1.0-SNAPSHOT</version>
-  <name>oraclecvs</name>
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<groupId>com.truecool.ant</groupId>
+	<artifactId>oraclecsv</artifactId>
+	<packaging>pom</packaging>
+	<version>1.0-SNAPSHOT</version>
+	
+	<name>oraclecvs</name>
 
-	<properties>
-		<lib.home>oracle_directory_here</lib.home>
-	</properties>
- 
-  <dependencies>
-		<dependency>	
-			<groupId>org.apache.ant</groupId>
-			<artifactId>ant</artifactId>
-			<version>1.9.4</version>
-		</dependency>  
-		<dependency>
-			<groupId>com.oracle</groupId>
-			<artifactId>ojdbc</artifactId>
-			<version>14</version>
-			<scope>system</scope>
-			<systemPath>${lib.home}/lib/ojdbc14.jar</systemPath>
-		</dependency>		
-	</dependencies>
+	<modules>
+		<module>oraclecsv-jar</module>
+		<module>oraclecsv-test</module>
+	</modules>
+
 </project>
