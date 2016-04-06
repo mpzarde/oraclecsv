@@ -102,7 +102,7 @@ public class ConnectionManager {
 	public static void handleLine( String table, String line,String dateformat) throws Exception {
 		String sql = prepareSql( table, line);
 		PreparedStatement statement = prepareStatement( sql, line,dateformat);
-		//statement.execute();
+		statement.execute();
 		statement.cancel();
 		statement.close();
 	}
