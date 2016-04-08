@@ -31,7 +31,7 @@ parameters.
 
   <target name="exportsystemscript">
     <export
-      dbmsuri="jdbc:oracle:thin:schema/password@host:1521:sid"
+    	dbmsuri="jdbc:oracle:thin:schema/password@host:1521:sid"
       table="systemscripttb"
       filepath="systemscript.txt"
       dateformat="MM/dd/yyyy hh:mm:ss a"/>
@@ -40,7 +40,7 @@ parameters.
 
   <target name="loadsystemscript">
     <loader
-      dbmsuri="jdbc:oracle:thin:schema/password@host:1521:sid"
+    	dbmsuri="jdbc:oracle:thin:schema/password@host:1521:sid"
       table="systemscripttb"
       truncate="true"
       filepath="file.txt"

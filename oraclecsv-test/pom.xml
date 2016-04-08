@@ -1,0 +1,77 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>com.truecool.ant</groupId>
+		<artifactId>oraclecsv</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
+	<groupId>com.truecool.ant</groupId>
+	<artifactId>oraclecsv-test</artifactId>
+	<packaging>pom</packaging>
+
+	<name>oraclecvs test</name>
+	
+	<properties>
+		<db.user></db.user>
+		<db.pass></db.pass>
+		<db.schema></db.schema>
+		<db.host></db.host>
+		<db.port></db.port>
+		<db.table></db.table>
+		<db.truncate>false</db.truncate>
+		
+		<dateformat>MM/dd/yyyy hh:mm:ss a</dateformat>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+				<version>1.8</version>
+				<dependencies>
+					<dependency>
+						<groupId>com.truecool.ant</groupId>
+						<artifactId>oraclecsv-jar</artifactId>
+						<version>${project.version}</version>
+					</dependency>
+				</dependencies>
+				<executions>
+					<execution>
+						<id>ant-test</id>
+						<phase>test</phase>
+						<goals>
+							<goal>run</goal>
+						</goals>
+						<configuration>
+							<tasks>
+								<taskdef name="loader" classname="com.truecool.ant.OracleLoaderTask" />
+								<taskdef name="export" classname="com.truecool.ant.OracleExportTask" />
+								
+								<echo>Export</echo>
+								<export
+									dbmsuri="jdbc:oracle:thin:${db.user}/${db.pass}@${db.host}:${db.port}:${db.schema}"
+									table="${db.table}" filepath="${project.build.directory}/export.txt" 
+									dateformat="${dateformat}" />
+									
+								<echo>Loader</echo>
+								<loader
+									dbmsuri="jdbc:oracle:thin:${db.user}/${db.pass}@${db.host}:${db.port}:${db.schema}"
+									table="${db.table}" truncate="${db.truncate}" filepath="${project.build.directory}/export.txt"
+									dateformat="${dateformat}" />
+							</tasks>
+
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+
+	</build>
+
+
+</project>
